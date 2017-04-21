@@ -5,7 +5,7 @@ class Repository(GitHubObject):
 
     def __init__(self, session, data):
         super().__init__(session, data)
-        self.ISSUES_URL = data['issues_url']
+        self.ISSUES_URL = data['issues_url'].replace('{/number}', '')
         self.ISSUE_URL = data['issues_url'].replace('{/number}', '/{}')
 
     def get_issue(self, id):
