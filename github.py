@@ -13,6 +13,7 @@ class GitHub():
         self.session = session
 
     def get_repo(self, name):
-        r = self.session.get(GitHub.API_ROOT + '/repos/' + name)
+        url = GitHub.API_ROOT + '/repos/' + name
+        r = self.session.get(url)
         r.raise_for_status()
         return Repository(self.session, r.json())
