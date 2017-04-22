@@ -8,6 +8,11 @@ class Repository(GitHubObject):
         self.issues_url = data['issues_url'].replace('{/number}', '')
         self.issue_url = data['issues_url'].replace('{/number}', '/{}')
 
+    def get_issues(self):
+        r = self.session.get(self.issues_url)
+        r.raise_for_status()
+        return [ Issue(self.session, data) for data in r.json() ]
+
     def get_issue(self, id):
         url = self.issue_url.format(id)
         r = self.session.get(url)
