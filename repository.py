@@ -11,7 +11,7 @@ class Repository(GitHubObject):
     def get_issues(self):
         r = self.session.get(self.issues_url)
         r.raise_for_status()
-        return [ Issue(self.session, data) for data in r.json() ]
+        return [Issue(self.session, data) for data in r.json()]
 
     def get_issue(self, id):
         url = self.issue_url.format(id)
