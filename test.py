@@ -3,7 +3,7 @@ from github import GitHub
 
 github = GitHub(config.token)
 repository = github.get_repo(config.repository)
-issue = repository.get_issue(1);
+issue = repository.get_issue(1)
 
 def warn_before_closing(issue):
     text = "Hi {login}!\nThis issue looks inactive\nI'm about to close it!"

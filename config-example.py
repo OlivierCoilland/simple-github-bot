@@ -1,2 +1,2 @@
-token='CHANGE_ME'
-repository='USER/REPO'
+token = 'CHANGE_ME'
+repository = 'USER/REPO'

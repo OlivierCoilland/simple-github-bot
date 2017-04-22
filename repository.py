@@ -4,12 +4,12 @@ from issue import Issue
 class Repository(GitHubObject):
 
     def __init__(self, session, data):
-        super().__init__(session, data)
-        self.ISSUES_URL = data['issues_url'].replace('{/number}', '')
-        self.ISSUE_URL = data['issues_url'].replace('{/number}', '/{}')
+        super(Repository, self).__init__(session, data)
+        self.issues_url = data['issues_url'].replace('{/number}', '')
+        self.issue_url = data['issues_url'].replace('{/number}', '/{}')
 
     def get_issue(self, id):
-        url = self.ISSUE_URL.format(id)
+        url = self.issue_url.format(id)
         r = self.session.get(url)
         r.raise_for_status()
         return Issue(self.session, r.json())

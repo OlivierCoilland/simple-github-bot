@@ -1,7 +1,7 @@
 import requests
 from repository import Repository
 
-class GitHub():
+class GitHub(object):
 
     API_ROOT = 'https://api.github.com'
 
