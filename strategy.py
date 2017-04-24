@@ -3,9 +3,6 @@ import utils
 
 class Strategy(object):
 
-    def __init__(self):
-        super(Strategy, self).__init__()
-
     def remove_bot_comments(self, comments):
         return [comment for comment in comments if '#ignore' not in comment['body']]
 
@@ -19,9 +16,6 @@ class Strategy(object):
         return warnings[-1] if warnings else None
 
 class LastCommentStrategy(Strategy):
-
-    def __init__(self):
-        super(LastCommentStrategy, self).__init__()
 
     def should_warn(self, issue):
         comments = issue.get_comments()
