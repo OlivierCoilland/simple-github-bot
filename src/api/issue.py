@@ -1,4 +1,4 @@
-from core import GitHubObject
+from .core import GitHubObject
 
 class Issue(GitHubObject):
 
@@ -8,7 +8,6 @@ class Issue(GitHubObject):
         self.comments_url = data['comments_url']
         self.events_url = data['events_url']
         self.labels_url = data['labels_url'].replace('{/name}', '')
-        self.label_url = data['labels_url'].replace('{/name}', '/{}')
 
     def get_comments(self):
         r = self.session.get(self.comments_url)

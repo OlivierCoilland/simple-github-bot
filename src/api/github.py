@@ -1,5 +1,5 @@
 import requests
-from repository import Repository
+from .repository import Repository
 
 class GitHub(object):
 

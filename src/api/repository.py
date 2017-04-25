@@ -1,5 +1,5 @@
-from core import GitHubObject
-from issue import Issue
+from .core import GitHubObject
+from .issue import Issue
 
 class Repository(GitHubObject):
 
@@ -13,8 +13,8 @@ class Repository(GitHubObject):
         r.raise_for_status()
         return [Issue(self.session, data) for data in r.json()]
 
-    def get_issue(self, id):
-        url = self.issue_url.format(id)
+    def get_issue(self, id_):
+        url = self.issue_url.format(id_)
         r = self.session.get(url)
         r.raise_for_status()
         return Issue(self.session, r.json())

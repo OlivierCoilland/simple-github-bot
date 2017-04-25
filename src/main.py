@@ -1,8 +1,7 @@
-from github import GitHub
-
 import config
 import strategy
-import task
+import tasks
+from api.github import GitHub
 
 class SimpleGitHubBot(object):
 
@@ -13,14 +12,12 @@ class SimpleGitHubBot(object):
 
     def monitor_issues_inactivity(self):
         inactivity_strategy = strategy.LastCommentStrategy()
-        warn_task = task.WarnTask()
-        close_task = task.CloseTask()
         issues = self.repository.get_issues()
         for issue in issues:
             if inactivity_strategy.should_close(issue):
-                close_task.close(issue)
+                tasks.close(issue)
             elif inactivity_strategy.should_warn(issue):
-                warn_task.warn(issue)
+                tasks.warn(issue)
 
 if __name__ == '__main__':
     bot = SimpleGitHubBot()

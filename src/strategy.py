@@ -19,13 +19,15 @@ class LastCommentStrategy(Strategy):
 
     def should_warn(self, issue):
         comments = issue.get_comments()
+        last_warning = self.get_last_warning(comments)
+        if last_warning is not None:
+            return False
+        created_at = issue.data['created_at']
         comments = self.remove_bot_comments(comments)
-        if not comments:
-            created_at = issue.data['created_at']
-        else:
-            last_comment = self.get_last_comment(comments)
+        last_comment = self.get_last_comment(comments)
+        if last_comment is not None:
             created_at = last_comment['created_at']
-        age = utils.age_from_iso(created_at)
+        age = utils.calculate_age_from_iso(created_at)
         return age > config.days_before_warning
 
     def should_close(self, issue):
@@ -34,5 +36,5 @@ class LastCommentStrategy(Strategy):
         if last_warning is None:
             return False
         created_at = last_warning['created_at']
-        age = utils.age_from_iso(created_at)
+        age = utils.calculate_age_from_iso(created_at)
         return age > config.days_between_warning_and_closing
